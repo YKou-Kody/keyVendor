@@ -1,0 +1,18 @@
+.trigger{
+    width:100%;
+}
+
+.reviewBody:focus{
+    border: 3px white;
+    box-shadow: 0 0 20px white; 
+    outline: 5px white;
+
+}
+
+.arrowIcon{
+    width:30px;
+    height: 30px;
+    fill:white;
+    margin-bottom: 3px;
+
+}
