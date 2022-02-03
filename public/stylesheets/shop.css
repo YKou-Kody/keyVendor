@@ -14,5 +14,10 @@
     height: 30px;
     fill:white;
     margin-bottom: 3px;
+}
+
+.carousel-image{
+    height:500px;
+    object-fit:cover;
 
 }

@@ -12,14 +12,17 @@
         <div class="col-6">
 
             <!-- <div id='map' style='width: 400px; height: 300px;'></div> -->
+            <!-- <div id='map' style='width: 400px; height: 300px;'></div> -->
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <img src="<%= shop.image[0]?.url%>" />
-
-                    <!-- Carosel goes here later -->
+                    <% shop.shopImage.forEach((img, i)=>{%>
+                        <div class="carousel-item <%= i===0 ? 'active' :''%>">
+                            <img class=" d-block w-100 carousel-image" src="<%= img.url%>" alt="" />
+                        </div>
+                        <%})%>
 
                 </div>
-                <%if(shop.image.length>1){%>
+                <%if(shop.shopImage.length>1){%>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -55,7 +58,7 @@
                 </ul>
 
                 <div class="card-footer text-muted">
-                    2 Days ago
+                    <a href="/shops/<%=shop._id%>/edit" class="btn btn-dark">Edit</a>
                 </div>
             </div>
         </div>
@@ -83,77 +86,89 @@
                                         <label class="form-label" for="rating">Rating</label>
                                         <input type="range" class="form-range" min="1" max="5" name="review[rating]" id="rating" />
                                     </div> -->
+                                    <div>
+                                        <div class="form-group row d-flex justify-content-center">
+                                            <label class="col-sm-2 col-form-label fw-bold text-light">Service:
+                                            </label>
+                                            <fieldset class="starability-basic" id="pricingInput">
+                                                <!-- <legend>First rating:</legend> -->
+                                                <input type="radio" id="no-rate" class="input-no-rate text-light"
+                                                    name="review[service]" value="1" checked aria-label="No rating." />
+                                                <input type="radio" id="first-rate1" name="review[service]" value="1" />
+                                                <label for="first-rate1" title="Terrible">1 star</label>
+                                                <input type="radio" id="first-rate2" name="review[service]" value="2" />
+                                                <label for="first-rate2" title="Not good">2 stars</label>
+                                                <input type="radio" id="first-rate3" name="review[service]" value="3" />
+                                                <label for="first-rate3" title="Average">3 stars</label>
+                                                <input type="radio" id="first-rate4" name="review[service]" value="4" />
+                                                <label for="first-rate4" title="Very good">4 stars</label>
+                                                <input type="radio" id="first-rate5" name="review[service]" value="5" />
+                                                <label for="first-rate5" title="Amazing">5 stars</label>
+                                            </fieldset>
+                                        </div>
 
-                                    <div class="form-group row d-flex justify-content-center">
-                                        <label class="col-sm-2 col-form-label fw-bold text-light">Service:
-                                        </label>
-                                        <fieldset class="starability-basic" id="pricingInput">
-                                            <!-- <legend>First rating:</legend> -->
-                                            <input type="radio" id="no-rate" class="input-no-rate text-light"
-                                                name="review[service]" value="1" checked aria-label="No rating." />
-                                            <input type="radio" id="first-rate1" name="review[service]" value="1" />
-                                            <label for="first-rate1" title="Terrible">1 star</label>
-                                            <input type="radio" id="first-rate2" name="review[service]" value="2" />
-                                            <label for="first-rate2" title="Not good">2 stars</label>
-                                            <input type="radio" id="first-rate3" name="review[service]" value="3" />
-                                            <label for="first-rate3" title="Average">3 stars</label>
-                                            <input type="radio" id="first-rate4" name="review[service]" value="4" />
-                                            <label for="first-rate4" title="Very good">4 stars</label>
-                                            <input type="radio" id="first-rate5" name="review[service]" value="5" />
-                                            <label for="first-rate5" title="Amazing">5 stars</label>
-                                        </fieldset>
+                                        <div class="form-group row d-flex justify-content-center">
+                                            <label class="col-sm-2 col-form-label fw-bold text-light">Selection:
+                                            </label>
+                                            <fieldset class="starability-basic">
+                                                <!-- <legend>First rating:</legend> -->
+                                                <input type="radio" id="no-rate11" class="input-no-rate text-light"
+                                                    name="review[selection]" value="1" checked
+                                                    aria-label="No rating." />
+                                                <input type="radio" id="first-rate11" name="review[selection]"
+                                                    value="1" />
+                                                <label for="first-rate11" title="Terrible">1 star</label>
+                                                <input type="radio" id="first-rate22" name="review[selection]"
+                                                    value="2" />
+                                                <label for="first-rate22" title="Not good">2 stars</label>
+                                                <input type="radio" id="first-rate33" name="review[selection]"
+                                                    value="3" />
+                                                <label for="first-rate33" title="Average">3 stars</label>
+                                                <input type="radio" id="first-rate44" name="review[selection]"
+                                                    value="4" />
+                                                <label for="first-rate44" title="Very good">4 stars</label>
+                                                <input type="radio" id="first-rate55" name="review[selection]"
+                                                    value="5" />
+                                                <label for="first-rate55" title="Amazing">5 stars</label>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="form-group row d-flex justify-content-center">
+                                            <label class="col-sm-2 col-form-label fw-bold text-light">Pricing:
+                                            </label>
+                                            <fieldset class="starability-basic">
+                                                <!-- <legend>First rating:</legend> -->
+                                                <input type="radio" id="no-rate2" class="input-no-rate text-light"
+                                                    name="review[pricing]" value="1" checked aria-label="No rating." />
+                                                <input type="radio" id="first-rate111" name="review[pricing]"
+                                                    value="1" />
+                                                <label for="first-rate111" title="Terrible">1 star</label>
+                                                <input type="radio" id="first-rate222" name="review[pricing]"
+                                                    value="2" />
+                                                <label for="first-rate222" title="Not good">2 stars</label>
+                                                <input type="radio" id="first-rate333" name="review[pricing]"
+                                                    value="3" />
+                                                <label for="first-rate333" title="Average">3 stars</label>
+                                                <input type="radio" id="first-rate444" name="review[pricing]"
+                                                    value="4" />
+                                                <label for="first-rate444" title="Very good">4 stars</label>
+                                                <input type="radio" id="first-rate555" name="review[pricing]"
+                                                    value="5" />
+                                                <label for="first-rate555" title="Amazing">5 stars</label>
+                                            </fieldset>
+                                        </div>
                                     </div>
-
-                                    <div class="form-group row d-flex justify-content-center">
-                                        <label class="col-sm-2 col-form-label fw-bold text-light">Selection:
-                                        </label>
-                                        <fieldset class="starability-basic">
-                                            <!-- <legend>First rating:</legend> -->
-                                            <input type="radio" id="no-rate11" class="input-no-rate text-light"
-                                                name="review[selection]" value="1" checked aria-label="No rating." />
-                                            <input type="radio" id="first-rate11" name="review[selection]" value="1" />
-                                            <label for="first-rate11" title="Terrible">1 star</label>
-                                            <input type="radio" id="first-rate22" name="review[selection]" value="2" />
-                                            <label for="first-rate22" title="Not good">2 stars</label>
-                                            <input type="radio" id="first-rate33" name="review[selection]" value="3" />
-                                            <label for="first-rate33" title="Average">3 stars</label>
-                                            <input type="radio" id="first-rate44" name="review[selection]" value="4" />
-                                            <label for="first-rate44" title="Very good">4 stars</label>
-                                            <input type="radio" id="first-rate55" name="review[selection]" value="5" />
-                                            <label for="first-rate55" title="Amazing">5 stars</label>
-                                        </fieldset>
-                                    </div>
-
-                                    <div class="form-group row d-flex justify-content-center">
-                                        <label class="col-sm-2 col-form-label fw-bold text-light">Pricing:
-                                        </label>
-                                        <fieldset class="starability-basic">
-                                            <!-- <legend>First rating:</legend> -->
-                                            <input type="radio" id="no-rate2" class="input-no-rate text-light"
-                                                name="review[pricing]" value="1" checked aria-label="No rating." />
-                                            <input type="radio" id="first-rate111" name="review[pricing]" value="1" />
-                                            <label for="first-rate111" title="Terrible">1 star</label>
-                                            <input type="radio" id="first-rate222" name="review[pricing]" value="2" />
-                                            <label for="first-rate222" title="Not good">2 stars</label>
-                                            <input type="radio" id="first-rate333" name="review[pricing]" value="3" />
-                                            <label for="first-rate333" title="Average">3 stars</label>
-                                            <input type="radio" id="first-rate444" name="review[pricing]" value="4" />
-                                            <label for="first-rate444" title="Very good">4 stars</label>
-                                            <input type="radio" id="first-rate555" name="review[pricing]" value="5" />
-                                            <label for="first-rate555" title="Amazing">5 stars</label>
-                                        </fieldset>
-                                    </div>
-
-
-                                    <div class="mb-3">
-                                        <label class="form-label text-light fw-bold" for="body">Review:</label>
-                                        <textarea class="form-control bg-dark text-light reviewBody" name="review[body]"
-                                            id="body" cols='30' rows="3" required></textarea>
-                                        <div class="valid-feedback">Looks Good</div>
-                                        <div class="invalid-feedback">Does not look good</div>
-                                    </div>
-                                    <div class="d-flex flex-row-reverse">
-                                        <button class="btn btn-light">Submit</button>
+                                    <div>
+                                        <div class="mb-3">
+                                            <label class="form-label text-light fw-bold" for="body">Review:</label>
+                                            <textarea class="form-control bg-dark text-light reviewBody"
+                                                name="review[body]" id="body" cols='30' rows="3" required></textarea>
+                                            <div class="valid-feedback">Looks Good</div>
+                                            <div class="invalid-feedback">Does not look good</div>
+                                        </div>
+                                        <div class="d-flex flex-row-reverse">
+                                            <button class="btn btn-light">Submit</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -162,52 +177,82 @@
                 </div>
 
                 <%}%>
+
                     <h2 class="text-light">Reviews:</h2>
-                    <% for (let review of shop.reviews){%>
+                    <% if (shop.reviews.length<1 && currentUser){%>
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h6 class="card-subtitile mb-2 text-muted">
-                                    By: <%= review.author.username%>
-                                        <br></br>
-                                        On: <%= review.date%>
+                                <h6 class="card-subtitile text-center h5">
+                                    There are no reviews for <%=shop.name%>, be the first!
                                 </h6>
-                                <div class="form-group row">
-                                    <label for="pricing" class="col-sm-2 col-form-label fw-bold">Pricing:
-                                    </label>
-                                    <p class="starability-result text-light" id="pricing"
-                                        data-rating="<%=review.pricing%>">
-                                        Rated:<%=review.pricing%>/5
-                                    </p>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="selection" class="col-sm-2 col-form-label fw-bold">Selection:</label>
-                                    <p class="starability-result text-light" id="selection"
-                                        data-rating="<%=review.selection%>">
-                                        Rated:<%=review.selection%>/5
-                                    </p>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="service" class="col-sm-2 col-form-label fw-bold">Service:</label>
-                                    <p class="starability-result text-light" id="service"
-                                        data-rating="<%=review.service%>">
-                                        Rated:<%=review.service%>/5
-                                    </p>
-                                </div>
+                                </p>
 
-                                <p class="card-text">
-                                <p class="fw-bold fs-5">Review:</p>
-                                <%= review.body%>
-
-                                    </p>
-                                    <% if(currentUser && review.author?.equals(currentUser)){%>
-                                        <form action="/campgrounds/<%=shop._id%>/reviews/<%=review._id%>?_method=DELETE"
-                                            method="POST">
-                                            <button class="btn btn-sm btn-danger">Delete review</button>
-                                        </form>
-                                        <%}%>
                             </div>
                         </div>
                         <%}%>
+
+                            <% if (shop.reviews.length<1 && !currentUser){%>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitile text-center h5">
+                                            There are no reviews for <%=shop.name%>, log in to be the first!
+                                        </h6>
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <%}%>
+
+
+                                    <% for (let review of shop.reviews){%>
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitile mb-2 text-muted">
+                                                    By: <%= review.author.username%>
+                                                        <br></br>
+                                                        On: <%= review.date%>
+                                                </h6>
+                                                <div class="form-group row">
+                                                    <label for="pricing"
+                                                        class="col-sm-2 col-form-label fw-bold">Pricing:
+                                                    </label>
+                                                    <p class="starability-result text-light" id="pricing"
+                                                        data-rating="<%=review.pricing%>">
+                                                        Rated:<%=review.pricing%>/5
+                                                    </p>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="selection"
+                                                        class="col-sm-2 col-form-label fw-bold">Selection:</label>
+                                                    <p class="starability-result text-light" id="selection"
+                                                        data-rating="<%=review.selection%>">
+                                                        Rated:<%=review.selection%>/5
+                                                    </p>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="service"
+                                                        class="col-sm-2 col-form-label fw-bold">Service:</label>
+                                                    <p class="starability-result text-light" id="service"
+                                                        data-rating="<%=review.service%>">
+                                                        Rated:<%=review.service%>/5
+                                                    </p>
+                                                </div>
+
+                                                <p class="card-text">
+                                                <p class="fw-bold fs-5">Review:</p>
+                                                <%= review.body%>
+
+                                                    </p>
+                                                    <% if(currentUser && review.author?.equals(currentUser)){%>
+                                                        <form
+                                                            action="/campgrounds/<%=shop._id%>/reviews/<%=review._id%>?_method=DELETE"
+                                                            method="POST">
+                                                            <button class="btn btn-sm btn-danger">Delete review</button>
+                                                        </form>
+                                                        <%}%>
+                                            </div>
+                                        </div>
+                                        <%}%>
 
         </div>
     </div>

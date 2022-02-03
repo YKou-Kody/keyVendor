@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
 const Shop = require("../Models/shop");
+const catchAsyncError = require("../error/catchAsyncError");
+
 //shop controller later
 const multer = require('multer');
-const { shopStorage, itemStorage } = require("../Cloudinary");
-const shopUpload = multer({ shopStorage });
-const itemUpload = multer({ itemStorage });
+const { storage, cloudinary } = require("../Cloudinary/index");
+const upload = multer({ storage });
 const mboxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding")
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mboxGeocoding({ accessToken: mapBoxToken });
@@ -23,29 +24,25 @@ router.route('/')
 
         res.render("./shops/allShops", { shops })
     })
-    .post(isLoggedIn, shopUpload.single('shopImage'), async (req, res) => {
-        try {
+    .post(isLoggedIn, upload.array('image'), async (req, res) => {
 
-            const geodata = await geocoder.forwardGeocode({ // gets geodata
-                query: req.body.shop.location,
-                limit: 1
-            }).send();
+        const geodata = await geocoder.forwardGeocode({ // gets geodata
+            query: req.body.shop.location,
+            limit: 1
+        }).send();
 
-            const shop = new Shop(req.body.shop);
-            shop.geometry = geodata.body.features[0].geometry;
-            shop.shopImage = {
-                url: req.file.path,
-                filename: req.file.filename
-            };
-            shop.author = req.user._id;
-            await shop.save();
-            console.log(shop);
-            req.flash('success', `Successfully add ${shop.name}`);
-            res.redirect(`/shops/${shop._id}`);
-        }
-        catch (e) {
-            console.log(e);
-        }
+        const shop = new Shop(req.body.shop);
+        shop.geometry = geodata.body.features[0].geometry;
+        shop.shopImage = req.files.map(f => ({
+            url: f.path,
+            filename: f.filename
+        }))
+        shop.author = req.user._id;
+        await shop.save();
+        console.log(shop?.shopImage[0]);
+        req.flash('success', `Successfully add ${shop.name}`);
+        res.redirect(`/shops/${shop._id}`);
+
 
 
     });

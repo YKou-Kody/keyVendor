@@ -11,6 +11,8 @@ const session = require('express-session')
 const flash = require('connect-flash')
 const passport = require('passport');
 const localStrategy = require('passport-local');
+const AppError = require("./error/AppError");
+const catchAsyncError = require("./error/catchAsyncError");
 
 // Import different routers used
 const shopRoutes = require("./Routes/shops")
@@ -81,6 +83,19 @@ app.use("/shops/:shopId/reviews", reviewRoutes);
 app.get("/", (req, res) => {
     res.render('home.ejs')
 })
+
+app.all("*", (req, res, next) => {
+    next(new AppError("OPS! PAGE NOT FOUND", 404));
+})
+
+app.use((err, req, res, next) => {
+    if (!err.message) {
+        err.message = "Unexpected error: "
+    }
+    const { statusCode = 500 } = err;
+    res.status(statusCode).render('error', { err });
+})
+
 
 app.listen(3000, () => {
     console.log('Successfully hosted')

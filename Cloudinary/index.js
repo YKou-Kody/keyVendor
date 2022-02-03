@@ -8,34 +8,34 @@ cloudinary.config({
 });
 
 
-const shopStorage = new CloudinaryStorage({
+const storage = new CloudinaryStorage({
     cloudinary,
-    params:{
-        folder:"keyVendor/shops",
-        allowedFormats:['jpeg', 'png', 'jpg']
+    params: {
+        folder: "keyVendor",
+        allowedFormats: ['jpeg', 'png', 'jpg']
     }
 });
 
-const itemStorage=new CloudinaryStorage({
+const itemStorage = new CloudinaryStorage({
     cloudinary,
-    params:{
-        folder:"keyVendor/items",
-        allowedFormats:['jpeg', 'png', 'jpg']
+    params: {
+        folder: "keyVendor",
+        allowedFormats: ['jpeg', 'png', 'jpg']
     }
 });
 
 
 const profileStorage = new CloudinaryStorage({
     cloudinary,
-    params:{
-        folder:"keyVendor/profiles",
-        allowedFormats:['jpeg', 'png', 'jpg']
+    params: {
+        folder: "keyVendor/profiles",
+        allowedFormats: ['jpeg', 'png', 'jpg']
     }
 });
 
-module.exports={
+module.exports = {
     cloudinary,
-    shopStorage,
+    storage,
     itemStorage,
     profileStorage
 }

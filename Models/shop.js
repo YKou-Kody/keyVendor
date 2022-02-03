@@ -14,7 +14,7 @@ const opts = { toJSON: { virtuals: true } };
 
 const ShopSchema = new Schema({
     name: String,
-    shopImage: ImageSchema,
+    shopImage: [ImageSchema],
     image: [ImageSchema],
     geometry: {
         type: {
