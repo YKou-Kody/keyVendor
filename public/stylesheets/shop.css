@@ -21,3 +21,17 @@
     object-fit:cover;
 
 }
+
+.totest{
+    display:none;
+    transition:2s;
+}
+
+.tohover:hover + .totest{
+    display:inline;
+    transition:2s;
+}
+
+.tohover{
+    transition:2s;
+}
