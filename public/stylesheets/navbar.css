@@ -1,0 +1,26 @@
+
+.item{
+    transition: 0.5s;
+    height:100%;
+    font-size:18px
+}
+.item:hover{
+    text-decoration:underline;
+    background-color: rgb(199, 199, 199);
+}
+
+.dropdown-item{
+    height:60px;
+
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.dropdown-item:active{
+    background-color: gray;
+}
+
+a:hover b{
+    text-decoration: underline solid black 1px;
+}

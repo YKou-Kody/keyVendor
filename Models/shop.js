@@ -7,7 +7,11 @@ const ImageSchema = new Schema({
 })
 
 ImageSchema.virtual('thumbnail').get(function () {
-    return this.url.replace("/upload", "/upload/w_200")
+    return this.url?.replace("/upload", "/upload/w_200")
+})
+
+ImageSchema.virtual('display').get(function () {
+    return this.url?.replace("/upload", "/upload/h_250")
 })
 
 const opts = { toJSON: { virtuals: true } };
@@ -41,6 +45,8 @@ const ShopSchema = new Schema({
         }
     ],
     website: String,
+    phone: String,
+    email: String,
     twitter: String,
     instagram: String,
     facebook: String

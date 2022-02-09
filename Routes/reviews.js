@@ -20,9 +20,14 @@ router.route('/')
     })
 
 router.route('/:reviewId')
-    .post()
-
-    .delete()
+    .put()
+    .delete(async (req, res) => {
+        const { shopId, reviewId } = req.params;
+        await Shop.findByIdAndUpdate(shopId, { $pull: { reviews: reviewId } });
+        await Review.findByIdAndDelete(reviewId);
+        req.flash("success", "Your review has been deleted.");
+        res.redirect(`/shops/${shopId}`);
+    })
 
 
 

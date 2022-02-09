@@ -1,7 +1,7 @@
 <% layout('/layouts/boilderplate') %>
     <div class="row">
         <h1 class="text-center text-white">Add shop</h1>
-        <div class="col-4 offset-4">
+        <div class="col-6 offset-3">
 
             <form action="/shops" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
                 <div class="mb-3">
@@ -13,44 +13,107 @@
                 </div>
 
                 <div class="mb-3">
+                    <label class="form-label text-white" for="description">Description</label>
+                    <textarea class='form-control' type="text" id="description" name="shop[description]"
+                        rows="5"></textarea>
+                    <div class="valid-feedback">Looks good!!</div>
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label text-white" for="location">Location</label>
-                    <input class='form-control' type="text" id="location" name="shop[location]" required />
+                    <input class='form-control' type="text" id="location" name="shop[location]" />
                     <div class="valid-feedback">Looks good!!</div>
                 </div>
                 <!-- <input type="file" name="image" id="" multiple /> -->
+
                 <div class="mb-3">
-                    <label class="form-label text-white" for="image">Images</label>
-                    <div class="input-group custom-file mb-3">
-                        <input type="file" class="form-control" id="image" name="image" multiple>
-                        <label class="input-group-text custom-file-label" for="image">Upload</label>
-                    </div>
+                    <label class="form-label text-white" for="website">Website URL</label>
+                    <input class='form-control' type="text" id="location" name="shop[website]" />
+                    <div class="valid-feedback">Looks good!!</div>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label text-white" for="phone">Phone</label>
+                    <input class='form-control' type="text" id="phone" name="shop[phone]" />
+                    <div class="valid-feedback">Looks good!!</div>
+                </div>
 
-                <!-- <div class="mb-3">
+                <dic class="row">
+                    <div class="mb-3 col-6">
+                        <label class="form-label text-white" for="email">Email</label>
+                        <input class='form-control' type="text" id="email" name="shop[email]" />
+                        <div class="valid-feedback">Looks good!!</div>
+                    </div>
+
+
+                    <div class="mb-3 col-6">
+                        <label class="form-label text-white" for="location">
+                            <img src="https://img.icons8.com/color/24/000000/twitter--v1.png" />
+                            Twitter</label>
+                        <div class="input-group">
+                            <span class="input-group-text " id="twitterprepend">@</span>
+                            <input class='form-control rounded-right' type="text" id="twitter" name="shop[twitter]"
+                                aria-describedby="twitterprepend" />
+                            <div class="valid-feedback">Looks good!!</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label class="form-label text-white" for="location">
+                                <img
+                                    src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/000000/external-instagram-photo-and-video-sharing-social-networking-service-owned-by-facebook-logo-color-tal-revivo.png" />
+                                Instagram</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="instagramprepend">@</span>
+                                <input class='form-control' type="text" id="instagram" name="shop[instagram]"
+                                    aria-describedby="instagramprepend" />
+                                <div class="valid-feedback">Looks good!!</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-6 ">
+                            <label class="form-label text-white" for="location">
+                                <img src="https://img.icons8.com/color/24/000000/facebook-new.png" />
+                                Facebook</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="facebookprepend">URL:</span>
+                                <input class='form-control' type="text" id="facebook" name="shop[facebook]"
+                                    aria-describedby="facebookprepend" />
+                                <div class="valid-feedback">Looks good!!</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="mb-3">
+                        <label class="form-label text-white" for="image">Images</label>
+                        <div class="input-group custom-file mb-3">
+                            <input type="file" class="form-control" id="image" name="image" multiple>
+                            <label class="input-group-text custom-file-label" for="image">Upload</label>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- <div class="mb-3">
                     <label class="form-label" for="image">Image URL</label>
                     <input class='form-control' type="text" id="image" name="campground[image]" required />
                     <div class="valid-feedback">Looks good!!</div>
                 </div> -->
 
-                <div class="mb-3">
 
-                    <div class="mb-3">
-                        <label class="form-label text-white" for="description">Description</label>
-                        <textarea class='form-control' type="text" id="description" name="shop[description]"
-                            required></textarea>
-                        <div class="valid-feedback">Looks good!!</div>
-                    </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 text-center">
                         <button class="btn btn-light">
                             Add Campground
                         </button>
-                    </div>
 
+                    </div>
             </form>
-            <a href="/shops">
-                Back to all campgrounds
-            </a>
+
         </div>
-    </div>
